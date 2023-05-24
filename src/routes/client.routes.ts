@@ -2,6 +2,8 @@ import { Router } from "express";
 import {
   createClientController,
   deleteClientController,
+  listAllClientController,
+  listClientContactsController,
   reatriveClientController,
   updateClientController,
 } from "../controllers/client.controller";
@@ -18,7 +20,7 @@ clientRoutes.post(
   ensureEmailExistMiddleware,
   createClientController
 );
-clientRoutes.get("/:email", ensureClientExistMiddleware, reatriveClientController);
+clientRoutes.get("/:email", ensureClientExistMiddleware, listClientContactsController);
 clientRoutes.patch(
   "/:email",
   ensureClientExistMiddleware,
@@ -27,5 +29,6 @@ clientRoutes.patch(
   updateClientController
 );
 clientRoutes.delete("/:email", ensureClientExistMiddleware, deleteClientController);
-
+clientRoutes.get("/info/:email", ensureClientExistMiddleware, reatriveClientController);
+clientRoutes.get("", listAllClientController);
 export default clientRoutes;

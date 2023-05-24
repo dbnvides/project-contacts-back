@@ -6,7 +6,7 @@ import { Client } from "../../entities/client.entitie";
 import { AppError } from "../../errors/AppError";
 import { clientContactSchemaResponse } from "../../schemas/client.schema";
 
-const listClientService = async (clientEmail: string): Promise<TClientContactResponse> => {
+const listClientContactsService = async (clientEmail: string): Promise<TClientContactResponse> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
 
@@ -28,4 +28,4 @@ const listClientService = async (clientEmail: string): Promise<TClientContactRes
   return clientContactSchemaResponse.parse(contacts);
 };
 
-export { listClientService };
+export { listClientContactsService };
