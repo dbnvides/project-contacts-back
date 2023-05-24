@@ -12,16 +12,18 @@ const ensureEmailExistMiddleware = async (req: Request, res: Response, next: Nex
   const contactRespository: Repository<TContact> = AppDataSource.getRepository(Contact);
   const { email } = req.body;
 
-  const findClient = await clientRepository.findOne({
-    where: { email: email },
-  });
+  if (email) {
+    const findClient = await clientRepository.findOne({
+      where: { email: email },
+    });
 
-  const findContact = await contactRespository.findOne({
-    where: { email: email },
-  });
+    const findContact = await contactRespository.findOne({
+      where: { email: email },
+    });
 
-  if (findClient || findContact) {
-    throw new AppError("Email already exist!");
+    if (findClient || findContact) {
+      throw new AppError("Email already exist!");
+    }
   }
 
   return next();
