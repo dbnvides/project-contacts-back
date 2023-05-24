@@ -11,20 +11,20 @@ export const createClientController = async (req: Request, res: Response) => {
 };
 
 export const reatriveClientController = async (req: Request, res: Response) => {
-  const clientId = req.params.id;
-  const listClientContact = await listClientService(clientId);
+  const clientEmail = req.params.email;
+  const listClientContact = await listClientService(clientEmail);
   return res.json(listClientContact);
 };
 
 export const updateClientController = async (req: Request, res: Response) => {
   const data = req.body;
-  const clientId = req.params.id;
-  const updateClient = await updateClientService(data, clientId);
+  const clientEmail = req.params.email;
+  const updateClient = await updateClientService(data, clientEmail);
   return res.json(updateClient);
 };
 
 export const deleteClientController = async (req: Request, res: Response) => {
-  const clientId = req.params.id;
-  await deleteClientService(clientId);
+  const clientEmail = req.params.email;
+  await deleteClientService(clientEmail);
   return res.status(204).send();
 };

@@ -8,23 +8,16 @@ import { clientSchemaResponse } from "../../schemas/client.schema";
 
 const updateClientService = async (
   data: TClientUpdateRequest,
-  clientId: string
+  clientEmail: string
 ): Promise<TClientResponse> => {
   const { email, fullName, password, telephone } = data;
 
   const clientRepository: Repository<TClient> = AppDataSource.getRepository(Client);
-  const oldClient = await clientRepository.findOneBy({ id: clientId });
-
-  //futuro middleware
-  if (email) {
-    const findClient = await clientRepository.findOne({
-      where: { email },
-    });
-
-    if (findClient) {
-      throw new AppError("Client already exist!");
-    }
-  }
+  const oldClient = await clientRepository.findOne({
+    where: {
+      email: clientEmail,
+    },
+  });
 
   if (password) {
     const hashedPassword = await hash(password, 10);

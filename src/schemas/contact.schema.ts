@@ -11,4 +11,5 @@ const contactSchemaRequest = contactSchema.omit({
   id: true,
 });
 
-export { contactSchema, contactSchemaRequest };
+const contactSchemaUpdate = contactSchema.omit({ id: true }).deepPartial();
+export { contactSchema, contactSchemaRequest, contactSchemaUpdate };
