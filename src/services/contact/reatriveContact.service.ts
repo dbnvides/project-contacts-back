@@ -2,10 +2,10 @@ import { Repository } from "typeorm";
 import { Contact } from "../../entities/contact.entitie";
 import { AppDataSource } from "../../data-source";
 import { AppError } from "../../errors/AppError";
-import { contactSchema } from "../../schemas/contact.schema";
-import { TContact } from "../../interfaces/contact.interfaces";
+import { contactSchemaResponse } from "../../schemas/contact.schema";
+import { TContactResponse } from "../../interfaces/contact.interfaces";
 
-const reatriveContactService = async (contactEmail: string): Promise<TContact> => {
+const reatriveContactService = async (contactEmail: string): Promise<TContactResponse> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
 
   const contact = await contactRepository.findOne({
@@ -17,7 +17,7 @@ const reatriveContactService = async (contactEmail: string): Promise<TContact> =
     throw new AppError("Contact not found", 404);
   }
 
-  return contactSchema.parse(contact);
+  return contactSchemaResponse.parse(contact);
 };
 
 export { reatriveContactService };

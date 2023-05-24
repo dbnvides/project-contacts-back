@@ -11,5 +11,8 @@ const contactSchemaRequest = contactSchema.omit({
   id: true,
 });
 
+const contactSchemaResponse = contactSchema.extend({
+  createdAt: z.date().or(z.string()),
+});
 const contactSchemaUpdate = contactSchema.omit({ id: true }).deepPartial();
-export { contactSchema, contactSchemaRequest, contactSchemaUpdate };
+export { contactSchema, contactSchemaRequest, contactSchemaUpdate, contactSchemaResponse };

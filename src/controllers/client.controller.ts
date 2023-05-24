@@ -2,7 +2,9 @@ import { Request, Response } from "express";
 import { createClientService } from "../services/client/createClient.service";
 import { updateClientService } from "../services/client/updateClient.service";
 import { deleteClientService } from "../services/client/deleteClient.service";
-import { listClientService } from "../services/client/listClient.service";
+import { listClientContactsService } from "../services/client/listClient.service";
+import { reatriveClientService } from "../services/client/reatriveClient.service";
+import { listAllClientService } from "../services/client/listAllClient.service";
 
 export const createClientController = async (req: Request, res: Response) => {
   const data = req.body;
@@ -12,7 +14,7 @@ export const createClientController = async (req: Request, res: Response) => {
 
 export const reatriveClientController = async (req: Request, res: Response) => {
   const clientEmail = req.params.email;
-  const listClientContact = await listClientService(clientEmail);
+  const listClientContact = await reatriveClientService(clientEmail);
   return res.json(listClientContact);
 };
 
@@ -27,4 +29,15 @@ export const deleteClientController = async (req: Request, res: Response) => {
   const clientEmail = req.params.email;
   await deleteClientService(clientEmail);
   return res.status(204).send();
+};
+
+export const listClientContactsController = async (req: Request, res: Response) => {
+  const clientEmail = req.params.email;
+  const listClientContact = await listClientContactsService(clientEmail);
+  return res.json(listClientContact);
+};
+
+export const listAllClientController = async (req: Request, res: Response) => {
+  const listClient = await listAllClientService();
+  return res.json(listClient);
 };

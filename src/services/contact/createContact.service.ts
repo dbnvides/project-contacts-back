@@ -2,14 +2,14 @@ import { Repository } from "typeorm";
 import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entitie";
 import { AppError } from "../../errors/AppError";
-import { TContact, TContactRequest } from "../../interfaces/contact.interfaces";
+import { TContactRequest, TContactResponse } from "../../interfaces/contact.interfaces";
 import { Contact } from "../../entities/contact.entitie";
-import { contactSchema } from "../../schemas/contact.schema";
+import { contactSchemaResponse } from "../../schemas/contact.schema";
 
 const createContactService = async (
   data: TContactRequest,
   clientEmail: string
-): Promise<TContact> => {
+): Promise<TContactResponse> => {
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
   const contactRespository: Repository<Contact> = AppDataSource.getRepository(Contact);
   const client = await clientRepository.findOne({
@@ -27,7 +27,7 @@ const createContactService = async (
 
   await contactRespository.save(contact);
 
-  return contactSchema.parse(contact);
+  return contactSchemaResponse.parse(contact);
 };
 
 export { createContactService };
