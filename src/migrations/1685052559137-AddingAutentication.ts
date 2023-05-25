@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
 
-export class CreateTables1684847158841 implements MigrationInterface {
-    name = 'CreateTables1684847158841'
+export class AddingAutentication1685052559137 implements MigrationInterface {
+    name = 'AddingAutentication1685052559137'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "clients" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "fullName" character varying(200) NOT NULL, "email" character varying NOT NULL, "password" character varying(120) NOT NULL, "telephone" character varying(11) NOT NULL, "createdAt" date NOT NULL DEFAULT now(), CONSTRAINT "UQ_b48860677afe62cd96e12659482" UNIQUE ("email"), CONSTRAINT "PK_f1ab7cf3a5714dbc6bb4e1c28a4" PRIMARY KEY ("id"))`);

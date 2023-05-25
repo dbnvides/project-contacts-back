@@ -11,6 +11,7 @@ import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValidMid
 import { clientSchemaRequest, clientSchemaUpdate } from "../schemas/client.schema";
 import { ensureClientExistMiddleware } from "../middlewares/ensureClientExistMiddleware.midleware";
 import { ensureEmailExistMiddleware } from "../middlewares/ensureEmailExistMiddleware";
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
 
 const clientRoutes = Router();
 
@@ -20,6 +21,7 @@ clientRoutes.post(
   ensureEmailExistMiddleware,
   createClientController
 );
+clientRoutes.use(ensureAuthMiddleware);
 clientRoutes.get("/:email", ensureClientExistMiddleware, listClientContactsController);
 clientRoutes.patch(
   "/:email",
