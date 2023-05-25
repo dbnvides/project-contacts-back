@@ -6,10 +6,10 @@ import { Contact } from "../entities/contact.entitie";
 
 const ensureContactExistMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
-  const clientEmail: string = req.params.email;
+  const clientId: string = req.params.id;
 
   const findContact = await contactRepository.findOne({
-    where: { email: clientEmail },
+    where: { id: clientId },
   });
 
   if (!findContact) {

@@ -21,16 +21,18 @@ clientRoutes.post(
   ensureEmailExistMiddleware,
   createClientController
 );
+clientRoutes.get("", listAllClientController);
+
 clientRoutes.use(ensureAuthMiddleware);
-clientRoutes.get("/:email", ensureClientExistMiddleware, listClientContactsController);
+clientRoutes.get("/:id", ensureClientExistMiddleware, listClientContactsController);
 clientRoutes.patch(
-  "/:email",
+  "/:id",
   ensureClientExistMiddleware,
   ensureEmailExistMiddleware,
   ensureDataIsValidMiddleware(clientSchemaUpdate),
   updateClientController
 );
-clientRoutes.delete("/:email", ensureClientExistMiddleware, deleteClientController);
-clientRoutes.get("/info/:email", ensureClientExistMiddleware, reatriveClientController);
-clientRoutes.get("", listAllClientController);
+clientRoutes.delete("/:id", ensureClientExistMiddleware, deleteClientController);
+clientRoutes.get("/info/:id", ensureClientExistMiddleware, reatriveClientController);
+
 export default clientRoutes;

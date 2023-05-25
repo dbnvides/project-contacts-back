@@ -5,12 +5,12 @@ import { AppError } from "../../errors/AppError";
 import { contactSchemaResponse } from "../../schemas/contact.schema";
 import { TContactResponse } from "../../interfaces/contact.interfaces";
 
-const reatriveContactService = async (contactEmail: string): Promise<TContactResponse> => {
+const reatriveContactService = async (contactId: string): Promise<TContactResponse> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
 
   const contact = await contactRepository.findOne({
     where: {
-      email: contactEmail,
+      id: contactId,
     },
   });
   if (!contact) {

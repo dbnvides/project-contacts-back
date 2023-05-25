@@ -6,26 +6,26 @@ import { deleteContactService } from "../services/contact/deleteContact.service"
 
 export const createContactController = async (req: Request, res: Response) => {
   const data = req.body;
-  const clientEmail = req.params.email;
-  const newContact = await createContactService(data, clientEmail);
+  const clientId = req.params.id;
+  const newContact = await createContactService(data, clientId);
   return res.status(200).json(newContact);
 };
 
 export const reatriveContactController = async (req: Request, res: Response) => {
-  const contactEmail = req.params.email;
-  const contact = await reatriveContactService(contactEmail);
+  const contactId = req.params.id;
+  const contact = await reatriveContactService(contactId);
   return res.json(contact);
 };
 
 export const updateContactController = async (req: Request, res: Response) => {
   const data = req.body;
-  const contactEmail = req.params.email;
-  const updateContact = await updateContactService(data, contactEmail);
+  const contactId = req.params.id;
+  const updateContact = await updateContactService(data, contactId);
   return res.json(updateContact);
 };
 
 export const deleteContactController = async (req: Request, res: Response) => {
-  const contactEmail = req.params.email;
-  await deleteContactService(contactEmail);
+  const contactId = req.params.id;
+  await deleteContactService(contactId);
   return res.status(204).send();
 };

@@ -10,24 +10,34 @@ import {
 } from "../controllers/contact.controller";
 import { ensureEmailExistMiddleware } from "../middlewares/ensureEmailExistMiddleware";
 import { ensureContactExistMiddleware } from "../middlewares/ensureContactExistMiddleware.middleware";
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
+import { ensureIsOwnerMiddleware } from "../middlewares/ensureIsOwner.middleware";
 
 const contactRoutes = Router();
 
+contactRoutes.use(ensureAuthMiddleware);
+
 contactRoutes.post(
-  "/:email",
+  "/:id",
   ensureClientExistMiddleware,
   ensureDataIsValidMiddleware(contactSchemaRequest),
   ensureEmailExistMiddleware,
   createContactController
 );
-contactRoutes.get("/:email", ensureContactExistMiddleware, reatriveContactController);
+contactRoutes.get("/:id", ensureContactExistMiddleware, reatriveContactController);
 contactRoutes.patch(
-  "/:email",
+  "/:id",
+  ensureIsOwnerMiddleware,
   ensureContactExistMiddleware,
   ensureEmailExistMiddleware,
   ensureDataIsValidMiddleware(contactSchemaUpdate),
   updateContactController
 );
-contactRoutes.delete("/:email", ensureContactExistMiddleware, deleteContactController);
+contactRoutes.delete(
+  "/:email",
+  ensureIsOwnerMiddleware,
+  ensureContactExistMiddleware,
+  deleteContactController
+);
 
 export default contactRoutes;

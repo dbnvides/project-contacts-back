@@ -6,12 +6,12 @@ import { contactSchema } from "../../schemas/contact.schema";
 
 const updateContactService = async (
   data: TContactUpdateRequest,
-  contactEmail: string
+  contactId: string
 ): Promise<TContact> => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
   const oldContact = await contactRepository.findOne({
     where: {
-      email: contactEmail,
+      id: contactId,
     },
   });
 
