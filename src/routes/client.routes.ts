@@ -11,6 +11,7 @@ import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValidMid
 import { clientSchemaRequest, clientSchemaUpdate } from "../schemas/client.schema";
 import { ensureClientExistMiddleware } from "../middlewares/ensureClientExistMiddleware.midleware";
 import { ensureEmailExistMiddleware } from "../middlewares/ensureEmailExistMiddleware";
+import { ensureAuthMiddleware } from "../middlewares/ensureAuth.middleware";
 
 const clientRoutes = Router();
 
@@ -20,15 +21,18 @@ clientRoutes.post(
   ensureEmailExistMiddleware,
   createClientController
 );
-clientRoutes.get("/:email", ensureClientExistMiddleware, listClientContactsController);
+clientRoutes.get("/all", listAllClientController);
+
+clientRoutes.use(ensureAuthMiddleware);
+clientRoutes.get("/contacts", ensureClientExistMiddleware, listClientContactsController);
 clientRoutes.patch(
-  "/:email",
+  "",
   ensureClientExistMiddleware,
   ensureEmailExistMiddleware,
   ensureDataIsValidMiddleware(clientSchemaUpdate),
   updateClientController
 );
-clientRoutes.delete("/:email", ensureClientExistMiddleware, deleteClientController);
-clientRoutes.get("/info/:email", ensureClientExistMiddleware, reatriveClientController);
-clientRoutes.get("", listAllClientController);
+clientRoutes.delete("/", ensureClientExistMiddleware, deleteClientController);
+clientRoutes.get("/info", ensureClientExistMiddleware, reatriveClientController);
+
 export default clientRoutes;

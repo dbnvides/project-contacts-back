@@ -12,6 +12,9 @@ class Client {
   @Column({ type: "varchar", unique: true })
   email: string;
 
+  @Column({ type: "varchar", length: 120 })
+  password: string;
+
   @Column({ type: "varchar", length: 11 })
   telephone: string;
 

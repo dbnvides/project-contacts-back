@@ -6,12 +6,12 @@ import { clientSchemaResponse } from "../../schemas/client.schema";
 
 const updateClientService = async (
   data: TClientUpdateRequest,
-  clientEmail: string
+  clientId: string
 ): Promise<TClientResponse> => {
   const clientRepository: Repository<TClient> = AppDataSource.getRepository(Client);
   const oldClient = await clientRepository.findOne({
     where: {
-      email: clientEmail,
+      id: clientId,
     },
   });
 

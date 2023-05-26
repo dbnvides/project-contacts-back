@@ -7,10 +7,10 @@ import { AppError } from "../errors/AppError";
 
 const ensureClientExistMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const clientRepository: Repository<TClient> = AppDataSource.getRepository(Client);
-  const clientEmail: string = req.params.email;
+  const clientId: string = res.locals.clientId;
 
   const findClient = await clientRepository.findOne({
-    where: { email: clientEmail },
+    where: { id: clientId },
   });
 
   if (!findClient) {

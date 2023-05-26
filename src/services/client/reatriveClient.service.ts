@@ -1,29 +1,22 @@
 import { Repository } from "typeorm";
-import {
-  TClient,
-  TClientContactResponse,
-  TClientRequest,
-  TClientResponse,
-} from "../../interfaces/client.interfaces";
-import { Contact } from "../../entities/contact.entitie";
 import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entitie";
-import { AppError } from "../../errors/AppError";
-import { clientContactSchemaResponse } from "../../schemas/client.schema";
+import { TClientAllContactResponse } from "../../interfaces/client.interfaces";
+import { clientInfoSchemaResponse } from "../../schemas/client.schema";
 
-const reatriveClientService = async (clientEmail: string) => {
+const reatriveClientService = async (clientId: string): Promise<TClientAllContactResponse> => {
   const clientRepository: Repository<Client> = AppDataSource.getRepository(Client);
 
-  const client: Array<Client> = await clientRepository.find({
+  const client = await clientRepository.find({
     where: {
-      email: clientEmail,
+      id: clientId,
     },
     relations: {
       contacts: true,
     },
   });
 
-  return client;
+  return clientInfoSchemaResponse.parse(client[0]);
 };
 
 export { reatriveClientService };

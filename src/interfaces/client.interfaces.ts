@@ -1,6 +1,7 @@
 import { z } from "zod";
 import {
   clientContactSchemaResponse,
+  clientInfoSchemaResponse,
   clientListAllSchema,
   clientSchema,
   clientSchemaRequest,
@@ -14,6 +15,7 @@ type TClientResponse = z.infer<typeof clientSchemaResponse>;
 type TClientContactResponse = z.infer<typeof clientContactSchemaResponse>;
 type TClientUpdateRequest = DeepPartial<TClientRequest>;
 type TClientListAll = z.infer<typeof clientListAllSchema>;
+type TClientAllContactResponse = z.infer<typeof clientInfoSchemaResponse>;
 
 export {
   TClient,
@@ -22,4 +24,5 @@ export {
   TClientUpdateRequest,
   TClientContactResponse,
   TClientListAll,
+  TClientAllContactResponse,
 };
