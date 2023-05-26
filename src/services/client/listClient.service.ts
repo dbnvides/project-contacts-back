@@ -15,6 +15,7 @@ const listClientContactsService = async (clientId: string): Promise<TClientConta
       id: clientId,
     },
   });
+
   if (!client) {
     throw new AppError("Client not found", 404);
   }

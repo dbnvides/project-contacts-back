@@ -23,7 +23,11 @@ const clientSchemaUpdate = clientSchema.omit({ id: true }).deepPartial();
 
 const clientContactSchemaResponse = z.array(contactSchema);
 
-const clientListAllSchema = z.array(clientSchema);
+const clientInfoSchemaResponse = clientSchemaResponse.extend({
+  contacts: contactSchema.array(),
+});
+
+const clientListAllSchema = z.array(clientSchemaResponse);
 
 export {
   clientSchema,
@@ -32,4 +36,5 @@ export {
   clientSchemaUpdate,
   clientContactSchemaResponse,
   clientListAllSchema,
+  clientInfoSchemaResponse,
 };

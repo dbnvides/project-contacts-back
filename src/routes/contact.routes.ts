@@ -18,13 +18,18 @@ const contactRoutes = Router();
 contactRoutes.use(ensureAuthMiddleware);
 
 contactRoutes.post(
-  "/:id",
+  "/new",
   ensureClientExistMiddleware,
   ensureDataIsValidMiddleware(contactSchemaRequest),
   ensureEmailExistMiddleware,
   createContactController
 );
-contactRoutes.get("/:id", ensureContactExistMiddleware, reatriveContactController);
+contactRoutes.get(
+  "/:id",
+  ensureIsOwnerMiddleware,
+  ensureContactExistMiddleware,
+  reatriveContactController
+);
 contactRoutes.patch(
   "/:id",
   ensureIsOwnerMiddleware,

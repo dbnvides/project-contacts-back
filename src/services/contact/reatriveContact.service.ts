@@ -13,10 +13,7 @@ const reatriveContactService = async (contactId: string): Promise<TContactRespon
       id: contactId,
     },
   });
-  if (!contact) {
-    throw new AppError("Contact not found", 404);
-  }
-
+  console.log(contact);
   return contactSchemaResponse.parse(contact);
 };
 

@@ -6,13 +6,17 @@ import { Contact } from "../entities/contact.entitie";
 
 const ensureContactExistMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const contactRepository: Repository<Contact> = AppDataSource.getRepository(Contact);
-  const clientId: string = req.params.id;
+  const contactId: string = req.params.id;
+  const clientId: string = res.locals.clientId;
 
   const findContact = await contactRepository.findOne({
-    where: { id: clientId },
+    where: { id: contactId },
+    relations: {
+      client: true,
+    },
   });
 
-  if (!findContact) {
+  if (!findContact || findContact.client.id !== clientId) {
     throw new AppError("Contact not found!");
   }
 
