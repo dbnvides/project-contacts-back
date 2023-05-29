@@ -7,9 +7,10 @@ Link do repositório do frontend: https://github.com/dbnvides/project-contacts-f
 
 A seguir, apresentamos um passo a passo para configurar e executar corretamente a parte backend do projeto contacts:
 
-Backend
+### `Backend`
+
 Passo 1:
-Após realizar o download do código, é necessário abrir o prompt de comando e executar o seguinte comando: yarn install ou npm install. Isso garantirá que todas as dependências necessárias sejam instaladas corretamente.
+Após realizar o download do código, é necessário abrir o prompt de comando e executar o seguinte comando: `yarn install` ou `npm install`. Isso garantirá que todas as dependências necessárias sejam instaladas corretamente.
 
 Passo 2:
 Agora, precisamos configurar o banco de dados. Para isso, crie um arquivo chamado ".env" e utilize o template fornecido no arquivo ".env.example". Nele, adicione as informações do seu banco de dados PostgreSQL.
@@ -22,9 +23,10 @@ Após realizar as configurações e executar o comando de inicialização, verif
 
 Agora, vamos prosseguir com as instruções para configurar e executar o frontend da aplicação.
 
-Frontend
+### `Frontend`
+
 Passo 1:
-Após realizar o download do código, abra o prompt de comando e execute o seguinte comando: yarn install ou npm install. Isso garantirá que todas as dependências necessárias sejam instaladas corretamente.
+Após realizar o download do código, abra o prompt de comando e execute o seguinte comando: `yarn install` ou `npm install`. Isso garantirá que todas as dependências necessárias sejam instaladas corretamente.
 
 Passo 2:
-Após a instalação das dependências, digite o comando yarn dev ou npm run dev. A aplicação exibirá uma mensagem confirmando seu funcionamento e mostrará a rota em que está sendo executada.
+Após a instalação das dependências, digite o comando `yarn dev` ou `npm run dev`. A aplicação exibirá uma mensagem confirmando seu funcionamento e mostrará a rota em que está sendo executada.
