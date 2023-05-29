@@ -3,6 +3,7 @@ import { TClient, TClientResponse, TClientUpdateRequest } from "../../interfaces
 import { AppDataSource } from "../../data-source";
 import { Client } from "../../entities/client.entitie";
 import { clientSchemaResponse } from "../../schemas/client.schema";
+import { hash } from "bcryptjs";
 
 const updateClientService = async (
   data: TClientUpdateRequest,
@@ -14,6 +15,20 @@ const updateClientService = async (
       id: clientId,
     },
   });
+
+  if (data.password) {
+    const hashedPassword = await hash(data.password, 10);
+
+    const client = clientRepository.create({
+      ...oldClient,
+      ...data,
+      password: hashedPassword,
+    });
+
+    await clientRepository.save(client);
+
+    return clientSchemaResponse.parse(client);
+  }
 
   const client = clientRepository.create({
     ...oldClient,
