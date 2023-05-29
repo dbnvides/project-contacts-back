@@ -39,7 +39,7 @@ contactRoutes.patch(
   updateContactController
 );
 contactRoutes.delete(
-  "/:email",
+  "/:id",
   ensureIsOwnerMiddleware,
   ensureContactExistMiddleware,
   deleteContactController
