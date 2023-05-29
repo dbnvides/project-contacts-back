@@ -7,13 +7,10 @@ import { handleAppErrorMiddleware } from "./middlewares/handleAppError.middlewar
 import contactRoutes from "./routes/contact.routes";
 import cors from "cors";
 import { loginRoutes } from "./routes/login.routes";
-import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "../swagger.json";
 
 const app: Application = express();
 app.use(cors());
 app.use(express.json());
-app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use("/client", clientRoutes);
 app.use("/contact", contactRoutes);
